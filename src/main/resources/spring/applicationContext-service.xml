@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <!--
+        加载资源文件.
+        第一种方式:
+        老套路,加载这个properties配置文件后,下面才可以用${}的方式解耦取值.
+        注意路径: 得去web模块的src/main/resources/目录下,新建这个properties目录了.
+        注意:不用杜云龙的这种方式,这种方式只能加载一个目录下的所有资源文件.
+             为了扩展性,我用可以加载多个目录下的资源文件的方式. 李旭的方式.
+    <context:property-placeholder location="classpath:properties/*.properties" />
+    -->
+    <!--第二种方式:-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!--//关键就是这个"locations",复数s,代表可以加载多个资源文件!! 这次要的就是多个!-->
+        <property name="locations">
+            <!--//上面既然是复数s,代表可以加载多个资源文件,那么下面理所应该就用"list"标签了!-->
+            <list>
+                <!-- //加载第一个资源文件.
+                <value>classpath:properties/jdbc.properties</value>
+                -->
+                <value>classpath:properties/*.properties</value>
+                <!-- 如果还要加载其他目录下的资源文件,在这里接续写value即可. -->
+                <!-- //配置缓存. 李旭,暂时没学到那里.-->
+                <!--<value>classpath:properties/memcached.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <!--
+        包扫描器，扫描带@Service注解的类
+        注意扫描的路径, 去service模块的src/main/java目录下,新建这个包:"com.cj.service".
+        注意,与进销存系统不同的是,这里的各层都拆开了,分为各个工程,
+        所以,这里不用排除扫描@Controller注解了,因为service模块里根本没这个注解.
+        下面这行,是杜云龙的,有一个缺陷: 如果其他同事不用"service"作为service层的包名,那么这样就不行了.
+        如果有需要,再去BB项目里找李旭的方式.
+    -->
+    <context:component-scan base-package="com.cj.core.service"></context:component-scan>
+
+    <!--
+        配置freemarker的:FreeMarkerConfigurer对象,进到IOC容器中.
+        设置此对象的俩字段:
+             templateLoaderPath:ftl的"模板"的存放的路径目录. 这里是相对本工程的路径.
+             defaultEncoding:字符集.
+    -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+</beans>

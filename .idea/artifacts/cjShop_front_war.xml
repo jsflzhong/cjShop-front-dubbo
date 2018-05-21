@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="cjShop-front:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="cjShop-front.war">
+      <element id="artifact" artifact-name="cjShop-front:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://code.alibabatech.com/schema/dubbo
+http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 用户服务接口 注意标签，与生产者不同。生产者那边是dubbo:service。 这里配的还是接口，不是实现。 -->
+    <dubbo:reference interface="com.cj.core.facade.service.ItemFacade" id="itemFacade" check="false" />
+    <dubbo:reference interface="com.cj.core.facade.service.ItemCatFacade" id="itemCatFacade" check="false" />
+    <dubbo:reference interface="com.cj.core.facade.service.ContentFacade" id="contentFacade" check="false" />
+</beans>

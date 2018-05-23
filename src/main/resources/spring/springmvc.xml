@@ -72,13 +72,13 @@
 		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
 
-	<!--自定义拦截器的配置-->
-	<mvc:interceptors>
+	<!--自定义拦截器的配置,为了测试dubbo,暂时注掉,让登录拦截器失效.-->
+	<!--<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- <mvc:mapping path="/order/**"/> -->
+			&lt;!&ndash; <mvc:mapping path="/order/**"/> &ndash;&gt;
 			<mvc:mapping path="/item/**"/>
 			<bean class="com.cj.core.controller.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+-->
 </beans> 

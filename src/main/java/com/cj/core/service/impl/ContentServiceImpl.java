@@ -3,7 +3,11 @@ package com.cj.core.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cj.core.facade.service.ContentFacade;
+import com.cj.core.facade.service.ItemFacade;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.cj.common.pojo.HttpClientUtil;
@@ -23,20 +27,28 @@ public class ContentServiceImpl implements ContentService {
 	private String REST_CONTENT_URL;
 	@Value("${REST_CONTENT_AD1_CID}")
 	private String REST_CONTENT_AD1_CID;
+
+	private static ContentFacade contentFacade;
+
+	static {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext-service.xml");
+		contentFacade = (ContentFacade) ctx.getBean("contentFacade");
+	}
 	
 	/**
 	 * 获得大广告位的内容
 	 */
 	@Override
 	public String getAd1List() {
-		
+
+
 		//用HttpClient,远程调用服务,来获得数据. (已经把HttpClientUtil工具类,放进common里了.用Get请求的方法.)
 		//参数是远程服务层的url.不要写死. 要写进配置文件. 
 		//spring容器已经加载那个配置文件了,在上面用@Value从配置文件中取值.
 		//把url分三段,原来是这样的:http://localhost:8081/rest/content/89
 		//第一段:http://localhost:8081/rest  第二段:/content 第三段:/89(大广告位的cid)
 		//返回一段JSON数据.
-		String json = HttpClientUtil.doGet(REST_BASE_URL + REST_CONTENT_URL + REST_CONTENT_AD1_CID);
+		//String json = HttpClientUtil.doGet(REST_BASE_URL + REST_CONTENT_URL + REST_CONTENT_AD1_CID);
 		//把json转换成java对象,为了取JSON里面的data属性的值.
 		//可以使用jsonutils工具类,也可以使用taotaoResult这个pojo自己的方法来转.
 		//上面的JSON串中的data属性里,是个list. 所以这里用formatToList()方法.
@@ -44,10 +56,11 @@ public class ContentServiceImpl implements ContentService {
 		//参数2,指定List中每个元素的数据类型.
 		String resultJson = null;
 		try {
-			TaotaoResult taotaoResult = TaotaoResult.formatToList(json, TbContent.class);
-			resultJson = "";
+			//TaotaoResult taotaoResult = TaotaoResult.formatToList(json, TbContent.class);
+			//resultJson = "";
 			//取data属性, 其实就是: "内容"list列表 .
-			List<TbContent> contentList = (List<TbContent>) taotaoResult.getData();
+			//List<TbContent> contentList = (List<TbContent>) taotaoResult.getData();
+			List<TbContent> contentList = contentFacade.getContentList(Long.parseLong(REST_CONTENT_AD1_CID));
 			//把上面拿到的"内容"list列表,转换成AdNode这个pojo的list列表.
 			//因为AdNode这个pojo的字段格式,符合前端轮播图需要的JSON格式.
 			//先建个载体集合.为AdNode的集合列表.

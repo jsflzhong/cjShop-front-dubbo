@@ -3,6 +3,7 @@ package com.cj.core.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.cj.core.facade.service.ContentFacade;
 import com.cj.core.facade.service.ItemFacade;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,12 +29,18 @@ public class ContentServiceImpl implements ContentService {
 	@Value("${REST_CONTENT_AD1_CID}")
 	private String REST_CONTENT_AD1_CID;
 
+	@Reference(version="1.0.0") //dubbo: 注解Annotation配置的方式. 如果用xml配置的方式,需要注掉本注解.
 	private static ContentFacade contentFacade;
 
-	static {
+	/**
+	 * dubbo: xml配置的方式
+	 * 需要手动从IOC中取出dubbo的服务接口作为bean.而不能用注解注入.
+	 * 如果用xml配置的方式,需要打开本段静态代码的注解.
+	 */
+	/*static {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext-service.xml");
 		contentFacade = (ContentFacade) ctx.getBean("contentFacade");
-	}
+	}*/
 	
 	/**
 	 * 获得大广告位的内容

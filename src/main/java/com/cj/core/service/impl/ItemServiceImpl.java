@@ -10,6 +10,8 @@ import com.cj.core.pojo.TbItem;
 import com.cj.core.pojo.TbItemDesc;
 import com.cj.core.pojo.TbItemParamItem;
 import com.cj.core.service.ItemService;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,14 +45,18 @@ public class ItemServiceImpl implements ItemService {
     //private String REST_ITEM_PARAM_URL;
 
     //dubbo
-    //@Reference(version="1.0.0")
-    //@Autowired
+    @Reference(version="1.0.0") //dubbo: 注解Annotation配置的方式. 如果用xml配置的方式,需要注掉本注解.
     private static ItemFacade itemFacade;
 
-    static {
+    /**
+     * dubbo: xml配置的方式
+     * 需要手动从IOC中取出dubbo的服务接口作为bean.而不能用注解注入.
+     * 如果用xml配置的方式,需要打开本段静态代码的注解.
+     */
+    /*static {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext-service.xml");
         itemFacade = (ItemFacade) ctx.getBean("itemFacade");
-    }
+    }*/
 
     /**
      * 根据商品id,通过dubbo调用服务,查询商品基本信息.
@@ -65,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
         //使用httpclient,调用远程服务.
         //为了维护方便,URL固定要写进配置文件中.
         //URL=rest服务系统的基础url + rest服务系统的"商品基本信息服务"的URL + 商品id.(http://localhost:8081/rest + /item/base/ + itemId)
-        TbItem itemById = itemFacade.getItemById(itemId);
+        TbItem item = itemFacade.getItemById(itemId);
        // String json = HttpClientUtil.doGet(REST_BASE_URL + REST_ITEM_BASE_URL + itemId);
         ///转换成java对象(服务层固定是把TaotaoResult对象转成的JSON)
         //注意参数二: TaotaoResult里的data字段里封装的数据,是什么类型,这里就写什么类型.
@@ -76,8 +82,12 @@ public class ItemServiceImpl implements ItemService {
         //TaotaoResult taotaoResult = TaotaoResult.formatToPojo(json, PortalItem.class);
         //取TaotaoResult里真正的数据:商品表的pojo对象
         //这里还是强转成父类,没问题的.用父类的引用,取子类的对象.
-        //return (TbItem) taotaoResult.getData();
-        return itemById;
+
+        //由于前端页面使用到了bean用的getImages()方法,但原始的TbItem中没有该方法(没有s),所以把返回的pojo转成自定义的子类PortalItem,
+        //该子类中扩展出了getImages()方法.
+        JSONObject jsonObject = net.sf.json.JSONObject.fromObject(item);
+        PortalItem portalItem = (PortalItem) JSONObject.toBean(jsonObject, PortalItem.class);
+        return portalItem;
     }
 
     /**

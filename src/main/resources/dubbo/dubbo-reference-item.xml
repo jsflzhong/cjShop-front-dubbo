@@ -5,8 +5,20 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 http://code.alibabatech.com/schema/dubbo
 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <!--####################### dubbo: xml配置的方式. 亲测可用.######################-->
+
     <!-- 用户服务接口 注意标签，与生产者不同。生产者那边是dubbo:service。 这里配的还是接口，不是实现。 -->
-    <dubbo:reference interface="com.cj.core.facade.service.ItemFacade" id="itemFacade" check="false" />
+    <!--<dubbo:reference interface="com.cj.core.facade.service.ItemFacade" id="itemFacade" check="false" />
     <dubbo:reference interface="com.cj.core.facade.service.ItemCatFacade" id="itemCatFacade" check="false" />
-    <dubbo:reference interface="com.cj.core.facade.service.ContentFacade" id="contentFacade" check="false" />
+    <dubbo:reference interface="com.cj.core.facade.service.ContentFacade" id="contentFacade" check="false" />-->
+
+
+
+
+    <!--####################### dubbo: 注解Annotation配置的方式. 亲测可用.######################-->
+    <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+    <dubbo:annotation package="com.cj.core.service" />
+
+
+
 </beans>

@@ -1,5 +1,7 @@
 package com.cj.core.pojo;
 
+import java.io.Serializable;
+
 /**
  * TbItem的子类.
  * 主要是为了重载 TbItem 类中的image字段.
@@ -8,7 +10,8 @@ package com.cj.core.pojo;
  * 2018/5/16
  * @author cj
  */
-public class PortalItem extends TbItem{
+public class PortalItem extends TbItem implements Serializable{
+    private static final long serialVersionUID = 3667280428817750162L;
 
     //TbItem父类的所有字段和方法,都自动拥有了.
 

@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://code.alibabatech.com/schema/dubbo
 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
-    <dubbo:application name="cjshop-front" />
+    <dubbo:application name="cjshop-front"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <!-- 多注册中心配置，竖号分隔表示同时连接多个不同注册中心，同一注册中心的多个集群地址用逗号分隔 -->
     <!-- 注册中心地址,要与服务生产者配置的地址和端口一致！ -->
-    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
     <!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
     <!--<dubbo:monitor protocol="registry"/>-->
     <dubbo:protocol port="20880"/>
 
+    <!-- 坑: 由于生产者那边的服务中使用了redis,而当redis服务不可用时,那边会消耗调用redis的时间,导致这边的调用超时抛异常.
+        所以这里要设置消费者调用生产者的可延迟时间!-->
+    <dubbo:consumer timeout="10000"/>
+
     <!--下面引入了外部xml，在同文件夹下，每个都是一个服务。-->
 
     <!-- 账户子系统服务接口引用 -->
-    <import resource="dubbo-reference-item.xml" />
+    <import resource="dubbo-reference-item.xml"/>
 </beans>

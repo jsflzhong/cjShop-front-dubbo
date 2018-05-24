@@ -32,17 +32,17 @@ import java.util.Map;
 public class ItemServiceImpl implements ItemService {
 
     //rest远程服务的基础url
-    //@Value("${REST_BASE_URL}")
-    //private String REST_BASE_URL;
+    @Value("${REST_BASE_URL}")
+    private String REST_BASE_URL;
     //rest服务系统中的: "商品基本信息服务"的URL
-   // @Value("${REST_ITEM_BASE_URL}")
-    //private String REST_ITEM_BASE_URL;
+    @Value("${REST_ITEM_BASE_URL}")
+    private String REST_ITEM_BASE_URL;
     //rest服务系统中的: "商品详情信息服务"的URL
-   // @Value("${REST_ITEM_DESC_URL}")
-   // private String REST_ITEM_DESC_URL;
+    @Value("${REST_ITEM_DESC_URL}")
+    private String REST_ITEM_DESC_URL;
     //rest服务系统中的: "商品参数服务"的URL
-    //@Value("${REST_ITEM_PARAM_URL}")
-    //private String REST_ITEM_PARAM_URL;
+    @Value("${REST_ITEM_PARAM_URL}")
+    private String REST_ITEM_PARAM_URL;
 
     //dubbo
     @Reference(version="1.0.0") //dubbo: 注解Annotation配置的方式. 如果用xml配置的方式,需要注掉本注解.

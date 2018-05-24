@@ -18,6 +18,12 @@ import com.cj.core.pojo.AdNode;
 import com.cj.core.pojo.TbContent;
 import com.cj.core.service.ContentService;
 
+/**
+ * 内容管理service
+ * dubbo
+ * @author 崔健
+ * @date 2016年10月7日下午10:48:27
+ */
 @Service
 public class ContentServiceImpl implements ContentService {
 

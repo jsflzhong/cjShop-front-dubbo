@@ -5,6 +5,8 @@
 
 删除了pojo,改为由cjShop-common-core工程的jar引入.
 
+改进了com.cj.core.service.impl.SearchServiceImpl, 改为用dubbo引用RPC服务.
+
 
 #20180523
 添加了dubbo的xml配置方式 和 注解配置的方式.

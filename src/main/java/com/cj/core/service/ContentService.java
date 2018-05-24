@@ -1,7 +1,8 @@
 package com.cj.core.service;
 
 /**
- * 内容管理service	
+ * 内容管理service
+ * dubbo
  * @author 崔健
  * @date 2016年10月7日下午10:48:27
  */

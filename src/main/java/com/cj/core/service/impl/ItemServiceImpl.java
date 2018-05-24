@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * 商品Service
- *
+ * dubbo
  * @author cj
  */
 @Service

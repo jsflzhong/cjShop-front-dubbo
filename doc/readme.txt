@@ -3,6 +3,9 @@
 本工程中删除:resources.properties和public_system.properties,
 改为从cjShop-common-config工程打成的jar包中引入资源文件.
 
+删除了pojo,改为由cjShop-common-core工程的jar引入.
+
+
 #20180523
 添加了dubbo的xml配置方式 和 注解配置的方式.
 两种方式都已实现.

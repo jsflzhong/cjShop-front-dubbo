@@ -66,8 +66,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public TbItem getItemById(Long itemId) {
 
-
-
         //使用httpclient,调用远程服务.
         //为了维护方便,URL固定要写进配置文件中.
         //URL=rest服务系统的基础url + rest服务系统的"商品基本信息服务"的URL + 商品id.(http://localhost:8081/rest + /item/base/ + itemId)

@@ -1,9 +1,9 @@
 package com.cj.core.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.cj.common.pojo.HttpClientUtil;
-import com.cj.common.pojo.TaotaoResult;
-import com.cj.common.utils.JsonUtils;
+import com.cj.core.pojo.HttpClientUtil;
+import com.cj.core.pojo.TaotaoResult;
+import com.cj.core.utils.JsonUtils;
 import com.cj.core.facade.service.ItemFacade;
 import com.cj.core.pojo.PortalItem;
 import com.cj.core.pojo.TbItem;

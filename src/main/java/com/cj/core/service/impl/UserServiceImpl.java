@@ -1,8 +1,8 @@
 package com.cj.core.service.impl;
 
-import com.cj.common.pojo.HttpClientUtil;
-import com.cj.common.pojo.TaotaoResult;
-import com.cj.common.utils.CookieUtils;
+import com.cj.core.pojo.HttpClientUtil;
+import com.cj.core.pojo.TaotaoResult;
+import com.cj.core.utils.CookieUtils;
 import com.cj.core.pojo.TbUser;
 import com.cj.core.service.UserService;
 import org.apache.commons.lang3.StringUtils;

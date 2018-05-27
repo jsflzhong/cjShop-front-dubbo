@@ -1,6 +1,6 @@
 package com.cj.core.service;
 
-import com.cj.common.pojo.TaotaoResult;
+import com.cj.core.pojo.TaotaoResult;
 
 /**
  * @author cj

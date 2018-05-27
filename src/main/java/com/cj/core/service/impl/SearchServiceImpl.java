@@ -1,8 +1,8 @@
 package com.cj.core.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.cj.common.pojo.HttpClientUtil;
-import com.cj.common.pojo.TaotaoResult;
+import com.cj.core.pojo.HttpClientUtil;
+import com.cj.core.pojo.TaotaoResult;
 import com.cj.core.facade.search.SearchFacade;
 import com.cj.core.pojo.SearchResult;
 import com.cj.core.service.SearchService;
@@ -57,6 +57,7 @@ public class SearchServiceImpl implements SearchService {
         try {
             //String json = HttpClientUtil.doGet(SEARCH_BASE_URL, param);
             searchResult = searchFacade.search(keyword, page, rows);
+            System.out.println("@@@@@@@@@ search返回,description: " + searchResult.getItemList().get(0).getItem_desc() + " @@@@@@@@@");
             /**
              注意:
              以后,凡是调用服务层返回的JSON,

@@ -11,9 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import com.cj.common.pojo.HttpClientUtil;
-import com.cj.common.pojo.TaotaoResult;
-import com.cj.common.utils.JsonUtils;
+import com.cj.core.pojo.HttpClientUtil;
+import com.cj.core.pojo.TaotaoResult;
+import com.cj.core.utils.JsonUtils;
 import com.cj.core.pojo.AdNode;
 import com.cj.core.pojo.TbContent;
 import com.cj.core.service.ContentService;

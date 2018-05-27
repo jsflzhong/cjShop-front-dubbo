@@ -1,7 +1,7 @@
 package com.cj.core.controller;
 
-import com.cj.common.pojo.TaotaoResult;
-import com.cj.common.utils.ExceptionUtil;
+import com.cj.core.pojo.TaotaoResult;
+import com.cj.core.utils.ExceptionUtil;
 import com.cj.core.service.StaticPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

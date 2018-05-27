@@ -1,6 +1,6 @@
 package com.cj.core.service.impl;
 
-import com.cj.common.pojo.TaotaoResult;
+import com.cj.core.pojo.TaotaoResult;
 import com.cj.core.pojo.TbItem;
 import com.cj.core.service.ItemService;
 import com.cj.core.service.StaticPageService;
